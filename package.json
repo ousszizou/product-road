@@ -19,8 +19,8 @@
   },
   "lint-staged": {
     "*.{ts,tsx,md,mdx,js,jsx}": [
-      "prettier --write",
-      "eslint"
+      "yarn format",
+      "yarn lint"
     ]
   },
   "simple-git-hooks": {
