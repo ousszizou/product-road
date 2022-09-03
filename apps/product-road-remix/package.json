@@ -1,6 +1,7 @@
 {
   "name": "product-road-remix",
   "private": true,
+  "version": "0.0.0",
   "sideEffects": false,
   "scripts": {
     "build": "remix build",
@@ -15,12 +16,14 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@prisma/client": "^4.3.1",
     "@remix-run/dev": "^1.7.0",
     "@remix-run/eslint-config": "^1.7.0",
     "@remix-run/serve": "^1.7.0",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "eslint": "^8.20.0",
+    "prisma": "^4.3.1",
     "typescript": "^4.7.4"
   },
   "engines": {
