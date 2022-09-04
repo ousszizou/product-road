@@ -13,6 +13,8 @@
     "format": "turbo run format"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
     "lint-staged": "^13.0.3",
     "simple-git-hooks": "^2.8.0",
     "turbo": "latest"
@@ -24,7 +26,7 @@
     ]
   },
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
+    "pre-commit": "npx lint-staged && npx --no -- commitlint --edit ${1}"
   },
   "engines": {
     "node": ">=14.0.0"
