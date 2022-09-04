@@ -29,8 +29,8 @@
   },
   "lint-staged": {
     "*.{ts,tsx,md,mdx,js,jsx}": [
-      "yarn format",
-      "yarn lint"
+      "prettier --write",
+      "eslint --fix"
     ]
   },
   "engines": {
