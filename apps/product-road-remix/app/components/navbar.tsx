@@ -1,4 +1,4 @@
-import { BiBugAlt, BiBulb, BiSlideshow } from "react-icons/bi";
+import { BiBugAlt, BiBulb, BiDetail, BiSlideshow } from "react-icons/bi";
 import {
   Box,
   Button,
@@ -35,6 +35,11 @@ const NAV_ITEMS: Array<NavItem> = [
     label: "مشاكل تقنية",
     icon: <BiBugAlt />,
     href: "/bugs",
+  },
+  {
+    label: "سجل التغييرات",
+    icon: <BiDetail />,
+    href: "/changelog",
   },
 ];
 
