@@ -20,6 +20,8 @@ import type {
 } from "@remix-run/node";
 import React, { useContext, useEffect } from "react";
 
+import Navbar from "~/components/navbar";
+import styles from "~/styles/index.css";
 import theme from "~/theme";
 import { withEmotionCache } from "@emotion/react";
 
@@ -37,6 +39,7 @@ export let links: LinksFunction = () => {
       rel: "stylesheet",
       href: "https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap",
     },
+    { rel: "stylesheet", href: styles },
   ];
 };
 
@@ -65,7 +68,7 @@ const Document = withEmotionCache(
     }, []);
 
     return (
-      <html lang="en">
+      <html dir="rtl" lang="ar">
         <head>
           <Meta />
           <Links />
@@ -104,6 +107,7 @@ export default function App() {
             : localStorageManager
         }
       >
+        <Navbar />
         <Outlet />
       </ChakraProvider>
     </Document>
