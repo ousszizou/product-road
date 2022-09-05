@@ -17,6 +17,7 @@ apps/product-road-remix/build
 apps/product-road-remix/public/build
 apps/product-road-remix/api/index.js
 apps/product-road-remix/api/index.js.map
+apps/product-road-remix/api/_assets
 
 # misc
 .DS_Store
