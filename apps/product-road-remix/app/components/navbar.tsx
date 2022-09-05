@@ -1,4 +1,4 @@
-import { BiBugAlt, BiBulb, BiDetail, BiSlideshow } from "react-icons/bi";
+import { BiBulb, BiDetail } from "react-icons/bi";
 import {
   Box,
   Button,
@@ -11,6 +11,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
+import { HiOutlineMap } from "react-icons/hi";
 import { Link } from "@remix-run/react";
 import Logo from "./logo";
 
@@ -22,19 +23,14 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: "ميزات",
+    label: "إقتراحات",
     icon: <BiBulb />,
-    href: "/features",
+    href: "/ideas",
   },
   {
-    label: "دورات",
-    icon: <BiSlideshow />,
-    href: "/courses",
-  },
-  {
-    label: "مشاكل تقنية",
-    icon: <BiBugAlt />,
-    href: "/bugs",
+    label: "خارطة الطريق",
+    icon: <HiOutlineMap />,
+    href: "/roadmap",
   },
   {
     label: "سجل التغييرات",
