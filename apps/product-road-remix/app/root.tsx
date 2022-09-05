@@ -1,3 +1,8 @@
+import {
+  ChakraProvider,
+  cookieStorageManagerSSR,
+  localStorageManager,
+} from "@chakra-ui/react";
 import { ClientStyleContext, ServerStyleContext } from "./context";
 import {
   Links,
@@ -6,11 +11,16 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
-import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import type {
+  LinksFunction,
+  LoaderFunction,
+  MetaFunction,
+} from "@remix-run/node";
 import React, { useContext, useEffect } from "react";
 
-import { ChakraProvider } from "@chakra-ui/react";
+import theme from "~/theme";
 import { withEmotionCache } from "@emotion/react";
 
 export const meta: MetaFunction = () => ({
@@ -78,10 +88,22 @@ const Document = withEmotionCache(
   }
 );
 
+export const loader: LoaderFunction = async ({ request }) => {
+  return request.headers.get("cookie") ?? "";
+};
+
 export default function App() {
+  const cookies = useLoaderData();
   return (
     <Document>
-      <ChakraProvider>
+      <ChakraProvider
+        theme={theme}
+        colorModeManager={
+          typeof cookies === "string"
+            ? cookieStorageManagerSSR(cookies)
+            : localStorageManager
+        }
+      >
         <Outlet />
       </ChakraProvider>
     </Document>
