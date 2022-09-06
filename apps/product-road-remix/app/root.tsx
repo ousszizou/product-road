@@ -1,7 +1,5 @@
 import {
-  Box,
   ChakraProvider,
-  Flex,
   cookieStorageManagerSSR,
   localStorageManager,
 } from "@chakra-ui/react";
@@ -22,8 +20,6 @@ import type {
 } from "@remix-run/node";
 import React, { useContext, useEffect } from "react";
 
-import Navbar from "~/components/navbar";
-import Sidebar from "~/components/sidebar";
 import styles from "~/styles/index.css";
 import theme from "~/theme";
 import { withEmotionCache } from "@emotion/react";
@@ -110,13 +106,7 @@ export default function App() {
             : localStorageManager
         }
       >
-        <Navbar />
-        <Flex>
-          <Sidebar />
-          <Box flexGrow={1} marginTop={"60px"} marginStart={"20rem"}>
-            <Outlet />
-          </Box>
-        </Flex>
+        <Outlet />
       </ChakraProvider>
     </Document>
   );

@@ -1,11 +1,10 @@
-import { Box, Button, Container } from "@chakra-ui/react";
+import type { LoaderFunction } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
+
+export const loader: LoaderFunction = async () => {
+  return redirect("/ideas/features");
+};
+
 export default function Index() {
-  return (
-    <Container maxW="4xl">
-      <Box py={8}>
-        <h1>Welcome to Remix</h1>
-        <Button colorScheme="blue">Button</Button>
-      </Box>
-    </Container>
-  );
+  return <></>;
 }

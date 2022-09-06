@@ -8,14 +8,20 @@ import {
   Button,
   Flex,
   VStack,
+  chakra,
   useRadioGroup,
 } from "@chakra-ui/react";
+import { Link, useLocation } from "@remix-run/react";
 
 import { BiPlus } from "react-icons/bi";
 import RadioCard from "./radioCard";
 import { useState } from "react";
 
-const ideas_types = ["ميزات", "دورات", "مشاكل تقنية"];
+const ideas_types = [
+  { name: "ميزات", href: "/ideas/features" },
+  { name: "دورات", href: "/ideas/courses" },
+  { name: "مشاكل تقنية", href: "/ideas/bugs" },
+];
 const ideas_status = [
   "في سجل الطلبات",
   "مقبولة",
@@ -25,19 +31,7 @@ const ideas_status = [
 ];
 
 const Sidebar = () => {
-  const {
-    getRootProps: getRootPropsIdeaTypes,
-    getRadioProps: getRadioPropsIdeaTypes,
-    value: valueIdeaTypes,
-  } = useRadioGroup({
-    name: "idea_type",
-    defaultValue: "ميزات",
-    onChange: (val) => SetTypeOfIdea(val),
-  });
-
-  const [typeOfIdea, SetTypeOfIdea] = useState<string | number>(valueIdeaTypes);
-
-  const groupIdeaTypes = getRootPropsIdeaTypes();
+  const { pathname } = useLocation();
 
   const {
     getRootProps: getRootPropsIdeaStatus,
@@ -67,15 +61,30 @@ const Sidebar = () => {
       mt={"60px"}
     >
       <Button rightIcon={<BiPlus />} colorScheme="blue" variant="solid">
-        {typeOfIdea !== "مشاكل تقنية" ? "اقتراح" : "ابلاغ عن"} {typeOfIdea}
+        {pathname.split("/")[2] === "features" && (
+          <chakra.span>اقتراح ميزة</chakra.span>
+        )}
+        {pathname.split("/")[2] === "courses" && (
+          <chakra.span>اقتراح دورة</chakra.span>
+        )}
+        {pathname.split("/")[2] === "bugs" && (
+          <chakra.span>الإبلاغ عن مشكل</chakra.span>
+        )}
       </Button>
-      <VStack spacing={1} mt={16} {...groupIdeaTypes}>
-        {ideas_types.map((value) => {
-          const radio = getRadioPropsIdeaTypes({ value });
+      <VStack spacing={2} mt={16}>
+        {ideas_types.map((route, index) => {
           return (
-            <RadioCard key={value} {...radio}>
-              {value}
-            </RadioCard>
+            <Box
+              bg="blackAlpha.200"
+              rounded="lg"
+              p={4}
+              w="full"
+              as={Link}
+              key={index}
+              to={route.href}
+            >
+              {route.name}
+            </Box>
           );
         })}
       </VStack>

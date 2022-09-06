@@ -10,9 +10,9 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
+import { Link, useLocation } from "@remix-run/react";
 
 import { HiOutlineMap } from "react-icons/hi";
-import { Link } from "@remix-run/react";
 import Logo from "./logo";
 
 interface NavItem {
@@ -108,7 +108,10 @@ export default function Navbar() {
 
 const DesktopNav = () => {
   const linkColor = useColorModeValue("gray.600", "gray.200");
+  const activeLinkColor = useColorModeValue("blue.600", "blue.200");
   const linkHoverColor = useColorModeValue("gray.800", "white");
+
+  const { pathname } = useLocation();
 
   return (
     <Stack direction={"row"} spacing={4}>
@@ -116,7 +119,11 @@ const DesktopNav = () => {
         <Link key={index} to={navItem.href}>
           <Flex
             fontWeight={500}
-            color={linkColor}
+            color={
+              navItem.href === `/${pathname.split("/")[1]}`
+                ? activeLinkColor
+                : linkColor
+            }
             _hover={{
               textDecoration: "none",
               color: linkHoverColor,
