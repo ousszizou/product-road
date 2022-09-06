@@ -25,7 +25,7 @@ const NAV_ITEMS: Array<NavItem> = [
   {
     label: "إقتراحات",
     icon: <BiBulb />,
-    href: "/ideas",
+    href: "/ideas/features",
   },
   {
     label: "خارطة الطريق",
