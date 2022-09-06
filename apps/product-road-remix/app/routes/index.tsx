@@ -1,9 +1,11 @@
-import { Button } from "@chakra-ui/react";
+import { Box, Button, Container } from "@chakra-ui/react";
 export default function Index() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <h1>Welcome to Remix</h1>
-      <Button colorScheme="blue">Button</Button>
-    </div>
+    <Container maxW="4xl">
+      <Box py={8}>
+        <h1>Welcome to Remix</h1>
+        <Button colorScheme="blue">Button</Button>
+      </Box>
+    </Container>
   );
 }
