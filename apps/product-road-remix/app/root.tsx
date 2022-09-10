@@ -20,6 +20,7 @@ import type {
 } from "@remix-run/node";
 import React, { useContext, useEffect } from "react";
 
+import { UserContextProvider } from "./utils/useUser";
 import styles from "~/styles/index.css";
 import theme from "~/theme";
 import { withEmotionCache } from "@emotion/react";
@@ -90,24 +91,51 @@ const Document = withEmotionCache(
   }
 );
 
+interface RootLoader {
+  ENV: { [key: string]: string };
+  cookies: string;
+}
+
 export const loader: LoaderFunction = async ({ request }) => {
-  return request.headers.get("cookie") ?? "";
+  const ENV = {
+    SUPABASE_URL: process.env.SUPABASE_URL,
+    SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
+  };
+  const cookies = request.headers.get("cookie") ?? "";
+
+  return { ENV, cookies };
 };
 
 export default function App() {
-  const cookies = useLoaderData();
+  const { cookies, ENV } = useLoaderData<RootLoader>();
   return (
     <Document>
-      <ChakraProvider
-        theme={theme}
-        colorModeManager={
-          typeof cookies === "string"
-            ? cookieStorageManagerSSR(cookies)
-            : localStorageManager
-        }
-      >
-        <Outlet />
-      </ChakraProvider>
+      <UserContextProvider>
+        <ChakraProvider
+          theme={theme}
+          colorModeManager={
+            typeof cookies === "string"
+              ? cookieStorageManagerSSR(cookies)
+              : localStorageManager
+          }
+        >
+          <Outlet />
+        </ChakraProvider>
+      </UserContextProvider>
+      <EnvironmentSetter env={ENV} />
     </Document>
+  );
+}
+
+/**
+ This component loads environment variables into window.ENV 
+ */
+function EnvironmentSetter({ env }: { env: { [key: string]: string } }) {
+  return (
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `window.ENV = ${JSON.stringify(env)}`,
+      }}
+    />
   );
 }
